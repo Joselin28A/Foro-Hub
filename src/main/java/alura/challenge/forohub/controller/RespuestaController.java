@@ -44,17 +44,4 @@ public class RespuestaController {
         return ResponseEntity.created(url).body(datosRespuesta);
     }
 
-    @GetMapping("/listar")
-    public ResponseEntity<Page<DatosListadoRespuesta>> listarRespuestas(@PageableDefault(size = 5) Pageable pageable) {
-        return ResponseEntity.ok(respuestaRepository.findAll(pageable).map(DatosListadoRespuesta::new));
-    }
-
-    @GetMapping("/detalles/{id}")
-    public ResponseEntity<DatosRespuesta> retornarRespuesta(@PathVariable Long id) {
-        Respuesta respuesta = respuestaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Respuesta no encontrada"));
-        DatosRespuesta datosRespuesta = new DatosRespuesta(respuesta);
-        return ResponseEntity.ok(datosRespuesta);
-    }
-
-
 }
